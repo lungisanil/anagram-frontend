@@ -1,0 +1,92 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-16">
+            <h4><b>Click the calc button to count anagrams of different lengths from the above dictionary
+              <button type="button" class="btn btn-primary" (click)="countAnagramsOfAllWordLengths()">Calc</button>
+            </b></h4>
+          </div>
+        </div>
+      </div>
+      <div class="help-block" *ngIf="anagramCounterList.length != 0">It took the anagram
+        algorithm {{algorithmExecutionTime}} milliseconds to calculate the results
+      </div>
+      <table class="table table-striped table-hover table-bordered table-content">
+        <thead>
+        <tr class="center-align">
+          <th>Anagram Length</th>
+          <th>Anagram Count</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let anagramCounter of anagramCounterList" class="center-align">
+          <td>{{ anagramCounter.anagramLength }}</td>
+          <td>{{ anagramCounter.anagramCounter }}</td>
+          <td>{{ anagramCounter.anagramCounterDescription }}</td>
+        </tr>
+        <tr>
+          <td *ngIf="anagramCounterList.length == 0" colspan="6">
+            <div class="spinner-border text-secondary " role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4><b>Find anagrams for a word from the above dictionary</b></h4>
+          </div>
+
+          <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <form (ngSubmit)="getAnagramsForGivenWord()" class="d-flex" role="search" #searchForm="ngForm">
+                <input [(ngModel)]="searchWord.wordText" class="form-control me-2" type="text" placeholder="Search"
+                       aria-label="Search" name="searchWord" id="searchWord">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-bordered table-content">
+        <thead>
+        <tr class="center-align">
+          <th>Word</th>
+          <th>Effective From</th>
+          <th>Effective To</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let anagram of anagrams" class="center-align">
+          <td>{{ anagram.wordText }}</td>
+          <td>{{ anagram.effectiveFrom }}</td>
+          <td>{{ anagram.effectiveTo }}</td>
+        </tr>
+        <tr>
+          <td *ngIf="anagrams.length == 0" colspan="6">
+            <div class="spinner-border text-secondary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
