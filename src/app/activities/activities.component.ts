@@ -10,10 +10,12 @@ import {ActivitiesService} from "../services/activities.service";
 export class ActivitiesComponent implements OnInit {
   addedWords: WordRecord[] = [];
   removedWords: WordRecord[] = [];
-  page: number = 1;
+  removedWordsPage: number = 1;
   shouldDisplayAddedWords: boolean = false;
   shouldDisplayRemovedWords: boolean = false;
-
+  private pageSize = 5;
+  private paginationLimit = 10;
+  addedWordsPage: number = 1;
 
   constructor(private activitiesService: ActivitiesService) {
   }
@@ -24,7 +26,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getAllAddedWords() {
-    this.activitiesService.getAllAddedWords(this.page, 5).subscribe({
+    this.activitiesService.getAllAddedWords(this.addedWordsPage, this.pageSize).subscribe({
       next: (returnedWords) => {
         this.addedWords = returnedWords.content;
       }
@@ -33,7 +35,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getAllRemovedWords() {
-    this.activitiesService.getAllRemovedWords(this.page, 5).subscribe({
+    this.activitiesService.getAllRemovedWords(this.removedWordsPage, this.pageSize).subscribe({
       next: (returnedWords) => {
         this.removedWords = returnedWords.content;
       }
@@ -42,33 +44,35 @@ export class ActivitiesComponent implements OnInit {
   }
 
   get numbers(): number[] {
-    const limit = 10;
-    return Array.from({length: limit}, (_, i) => i + 1);
+    return Array.from({length: this.paginationLimit}, (_, i) => i + 1);
   }
 
   next(isAddedWordsPaginator: boolean) {
-    this.page++;
     if (isAddedWordsPaginator) {
+      this.addedWordsPage++
       this.getAllAddedWords();
     } else {
+      this.removedWordsPage++;
       this.getAllRemovedWords()
     }
   }
 
   prev(isAddedWordsPaginator: boolean) {
-    this.page--;
     if (isAddedWordsPaginator) {
+      this.addedWordsPage--;
       this.getAllAddedWords();
     } else {
+      this.removedWordsPage--;
       this.getAllRemovedWords()
     }
   }
 
   to(page: number, isAddedWordsPaginator: boolean) {
-    this.page = page;
     if (isAddedWordsPaginator) {
+      this.addedWordsPage = page;
       this.getAllAddedWords();
     } else {
+      this.removedWordsPage = page;
       this.getAllRemovedWords()
     }
   }

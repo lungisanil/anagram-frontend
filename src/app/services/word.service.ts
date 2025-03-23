@@ -12,7 +12,8 @@ export class WordService {
   }
 
   getAllWords(pageNumber: number, pageSize: number): Observable<any> {
-    let context = 'retrieve/all?pageNumber=' + --pageNumber + '&pageSize=' + pageSize;
+    pageNumber--
+    let context = 'retrieve/all?pageNumber=' + pageNumber + '&pageSize=' + pageSize;
     return this.httpClient.get<any>(this.url + context);
   }
 

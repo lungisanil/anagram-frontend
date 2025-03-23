@@ -14,6 +14,11 @@ export class DictionaryComponent implements OnInit {
   wordToRemove: string = '';
   wordRemovedSuccessful: boolean = false;
   page: number = 1;
+  private pageSize = 20;
+  private paginationLimit = 10;
+  shouldDisplayDictionary: boolean = false;
+  shouldDisplayRemovalToastMessage: boolean = false;
+  removeButtonClicked: boolean = false;
 
   constructor(private wordService: WordService) {
   }
@@ -23,11 +28,12 @@ export class DictionaryComponent implements OnInit {
   }
 
   getAllWords() {
-    this.wordService.getAllWords(this.page, 20).subscribe({
+    this.wordService.getAllWords(this.page, this.pageSize).subscribe({
       next: (returnedWords) => {
         this.words = returnedWords.content;
       }
     });
+    this.shouldDisplayDictionary = true;
   }
 
   addWord() {
@@ -42,6 +48,7 @@ export class DictionaryComponent implements OnInit {
   }
 
   removeWord() {
+    this.removeButtonClicked = true;
     this.wordService.removeWord(this.wordToRemove).subscribe({
       next: (removalResponse) => {
         if (removalResponse.message == 'Success') {
@@ -49,6 +56,7 @@ export class DictionaryComponent implements OnInit {
         }
       }
     });
+    this.shouldDisplayRemovalToastMessage = true;
     this.getAllWords();
   }
 
@@ -58,8 +66,7 @@ export class DictionaryComponent implements OnInit {
   }
 
   get numbers(): number[] {
-    const limit = 10;
-    return Array.from({length: limit}, (_, i) => i + 1);
+    return Array.from({length: this.paginationLimit}, (_, i) => i + 1);
   }
 
   next() {
@@ -72,8 +79,13 @@ export class DictionaryComponent implements OnInit {
     this.getAllWords();
   }
 
-  to(page: number) {
-    this.page = page;
+  to(toPage: number) {
+    this.page = toPage;
     this.getAllWords();
+  }
+
+  resetFlags() {
+    this.shouldDisplayRemovalToastMessage = false;
+    this.removeButtonClicked = false;
   }
 }

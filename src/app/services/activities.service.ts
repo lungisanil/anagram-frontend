@@ -12,12 +12,14 @@ export class ActivitiesService {
   }
 
   getAllAddedWords(pageNumber: number, pageSize: number): Observable<any> {
-    let context = 'added?pageNumber=' + --pageNumber + '&pageSize=' + pageSize;
+    pageNumber--
+    let context = 'added?pageNumber=' + pageNumber + '&pageSize=' + pageSize;
     return this.httpClient.get<any>(this.url + context);
   }
 
   getAllRemovedWords(pageNumber: number, pageSize: number): Observable<any> {
-    let context = 'removed?pageNumber=' + --pageNumber + '&pageSize=' + pageSize;
+    pageNumber--
+    let context = 'removed?pageNumber=' + pageNumber + '&pageSize=' + pageSize;
     return this.httpClient.get<any>(this.url + context);
   }
 }

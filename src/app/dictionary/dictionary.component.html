@@ -28,9 +28,14 @@
           </td>
         </tr>
         <tr>
-          <td *ngIf="words.length == 0" colspan="6">
+          <td *ngIf="words.length == 0 && shouldDisplayDictionary == false" colspan="6">
             <div class="spinner-border text-secondary " role="status">
               <span class="visually-hidden">Loading...</span>
+            </div>
+          </td>
+          <td *ngIf="words.length == 0 && shouldDisplayDictionary" colspan="6">
+            <div class="text-secondary">
+              No words found for the dictionary page.
             </div>
           </td>
         </tr>
@@ -102,13 +107,19 @@
       <div class="container-fluid">
         <form (ngSubmit)="removeWord()" class="d-flex" role="search" #searchForm="ngForm">
           <input [(ngModel)]="wordToRemove" class="form-control me-2" type="text" placeholder="Remove"
-                 aria-label="Remove" name="wordToRemove" id="wordToRemove">
+                 aria-label="Remove" name="wordToRemove" id="wordToRemove" #Input4="ngModel" required
+                 (ngModelChange)="resetFlags()">
           <button class="btn btn-outline-danger" type="submit">Remove</button>
         </form>
       </div>
     </nav>
-    <div class="help-block" *ngIf="wordRemovedSuccessful">The word {{wordToRemove}} has been successful removed from the
-      dictionary.
+    <div class="help-block" *ngIf="wordRemovedSuccessful && removeButtonClicked && Input4.touched && Input4.valid">The
+      word {{wordToRemove}} has been
+      successful removed from the dictionary.
+    </div>
+    <div class="help-block"
+         *ngIf="wordRemovedSuccessful == false && removeButtonClicked && Input4.touched && Input4.valid">The
+      word {{wordToRemove}} has not been successful removed from the dictionary.
     </div>
   </div>
 </div>

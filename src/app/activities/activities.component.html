@@ -42,19 +42,33 @@
     <!-- paginator -->
     <nav *ngIf="numbers.length > 1">
       <ul class="pagination justify-content-center">
-        <li id="prevAdded" class="page-item" [ngClass]="{ 'disabled': page === 1 }">
+        <li id="prevAdded" class="page-item" [ngClass]="{ 'disabled': addedWordsPage === 1 }">
           <a class="page-link text-secondary" href="#" (click)="prev(true)">Previous</a>
         </li>
         <ng-container *ngIf="true">
-          <li class="page-item" *ngFor="let number of numbers" [ngClass]="{ 'active': page === number }">
+          <li class="page-item" *ngFor="let number of numbers" [ngClass]="{ 'active': addedWordsPage === number }">
             <a class="page-link text-secondary" (click)="to(number, true)">{{number}}</a>
           </li>
         </ng-container>
-        <li id="nextAdded" class="page-item" [ngClass]="{ 'disabled': page === numbers.length }">
+        <li id="nextAdded" class="page-item" [ngClass]="{ 'disabled': addedWordsPage === numbers.length }">
           <a class="page-link text-secondary" (click)="next(true)" disabled="true">Next</a>
         </li>
       </ul>
     </nav>
+    <div class="row">
+      <div class="col-sm-8">
+        <h4><b>Search for a page of added words</b></h4>
+      </div>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <form (ngSubmit)="getAllAddedWords()" class="d-flex" role="search" #searchForm="ngForm">
+            <input [(ngModel)]="addedWordsPage" class="form-control me-2" type="text" placeholder="Page Number"
+                   aria-label="Add" name="page" id="addedWordPage">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </div>
     <br>
     <br>
     <div class="table-responsive">
@@ -99,18 +113,32 @@
     <!-- paginator -->
     <nav *ngIf="numbers.length > 1">
       <ul id="removedPaginator" class="pagination justify-content-center">
-        <li id="prevRemoved" class="page-item" [ngClass]="{ 'disabled': page === 1 }">
+        <li id="prevRemoved" class="page-item" [ngClass]="{ 'disabled': removedWordsPage === 1 }">
           <a class="page-link text-secondary" href="#" (click)="prev(false)">Previous</a>
         </li>
         <ng-container *ngIf="true">
-          <li class="page-item" *ngFor="let number of numbers" [ngClass]="{ 'active': page === number }">
+          <li class="page-item" *ngFor="let number of numbers" [ngClass]="{ 'active': removedWordsPage === number }">
             <a class="page-link text-secondary" (click)="to(number, false)">{{number}}</a>
           </li>
         </ng-container>
-        <li id="nextRemoved" class="page-item" [ngClass]="{ 'disabled': page === numbers.length }">
+        <li id="nextRemoved" class="page-item" [ngClass]="{ 'disabled': removedWordsPage === numbers.length }">
           <a class="page-link text-secondary" (click)="next(false)" disabled="true">Next</a>
         </li>
       </ul>
     </nav>
+    <div class="row">
+      <div class="col-sm-8">
+        <h4><b>Search for a page of removed words</b></h4>
+      </div>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <form (ngSubmit)="getAllRemovedWords()" class="d-flex" role="search" #searchForm="ngForm">
+            <input [(ngModel)]="removedWordsPage" class="form-control me-2" type="text" placeholder="Page Number"
+                   aria-label="Add" name="page" id="page">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </div>
   </div>
 </section>

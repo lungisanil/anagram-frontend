@@ -1,27 +1,19 @@
 # AnagramApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.5.
+This Angular app has got 3 main components which are the dictionary, anagrams and activities
 
-## Development server
+## Dictionary Tab
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This tab allows a user to browse the dictionary. Here the user can browse using a paginator which allows a user to browse up to 10 
+pages. However, there is functionality given to the user to browse the page of their choice. The pages for dictionary have a chosen max 
+of 20 words per page. The user have the ability to remove a word from the dictionary by clicking the remove button next to the word. 
+The user also have ability to remove the word by manually typing the word they want to remove. The users also have the ability to add a word. 
 
-## Code scaffolding
+## Anagrams Tab
+This tab allows the user to execute the algorithm that calculates the anagram of different lengths. The uses also have the ability to search for anagrams in the dictionary for
+the word of their choice. It is important to note that the algorithm is dynamic, what that means is that it always takes into consideration the changes that have happened to
+the dictionary when calculating the results. The user can also see the amount of time it took the algorithm to run.  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Activities Tab
+This tab allows users to see newly added words to the dictionary as well as words which have been removed from the dictionary.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

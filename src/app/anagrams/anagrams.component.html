@@ -4,8 +4,8 @@
       <div class="table-title">
         <div class="row">
           <div class="col-sm-16">
-            <h4><b>Click the calc button to count anagrams of different lengths from the above dictionary
-              <button type="button" class="btn btn-primary" (click)="countAnagramsOfAllWordLengths()">Calc</button>
+            <h4><b>Click the calc button to count anagrams of different lengths from the dictionary
+              <button class="btn btn-outline-primary" (click)="countAnagramsOfAllWordLengths()">Calc</button>
             </b></h4>
           </div>
         </div>
@@ -55,7 +55,7 @@
       <div class="table-title">
         <div class="row">
           <div class="col-sm-6">
-            <h4><b>Find anagrams for a word from the above dictionary</b></h4>
+            <h4><b>Find anagrams for a word from the dictionary</b></h4>
           </div>
 
           <nav class="navbar bg-body-tertiary">
@@ -84,14 +84,19 @@
           <td>{{ anagram.effectiveTo }}</td>
         </tr>
         <tr>
-          <td *ngIf="anagrams.length == 0 && shouldSearchWord" colspan="6">
+          <td *ngIf="anagrams.length == 0 && shouldSearchWord && noAnagramsFound == false" colspan="6">
             <div class="spinner-border text-secondary" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </td>
-          <td *ngIf="anagrams.length == 0 && shouldSearchWord == false" colspan="6">
+          <td *ngIf="anagrams.length == 0 && shouldSearchWord == false && noAnagramsFound == false" colspan="6">
             <div class="text-secondary">
               Find anagrams for a word from the above dictionary
+            </div>
+          </td>
+          <td *ngIf="anagrams.length == 0 && noAnagramsFound" colspan="6">
+            <div class="text-secondary">
+              No anagrams match your search word.
             </div>
           </td>
         </tr>
