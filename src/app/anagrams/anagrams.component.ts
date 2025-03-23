@@ -13,6 +13,8 @@ export class AnagramsComponent implements OnInit {
   anagramCounterList: AnagramCounter[] = [];
   algorithmExecutionTime: number = 0;
   searchWord: WordRecord = new WordRecord('', '', '');
+  shouldRunAlgorithm : boolean = false;
+  shouldSearchWord: boolean = false;
 
   constructor(private anagramService: AnagramService) {
   }
@@ -21,6 +23,7 @@ export class AnagramsComponent implements OnInit {
   }
 
   countAnagramsOfAllWordLengths() {
+    this.shouldRunAlgorithm = true;
     //Reset the counter list when the calc button is clicked
     this.anagramCounterList = [];
     this.anagramService.countAnagramsOfAllWordLengths().subscribe({
@@ -32,6 +35,7 @@ export class AnagramsComponent implements OnInit {
   }
 
   getAnagramsForGivenWord() {
+    this.shouldSearchWord = true;
     this.anagramService.getAnagramsForGivenWord(this.searchWord.wordText).subscribe({
       next: (returnedAnagrams) => {
         this.anagrams = returnedAnagrams;

@@ -28,9 +28,14 @@
           <td>{{ anagramCounter.anagramCounterDescription }}</td>
         </tr>
         <tr>
-          <td *ngIf="anagramCounterList.length == 0" colspan="6">
+          <td *ngIf="anagramCounterList.length == 0 && shouldRunAlgorithm" colspan="6">
             <div class="spinner-border text-secondary " role="status">
               <span class="visually-hidden">Loading...</span>
+            </div>
+          </td>
+          <td *ngIf="anagramCounterList.length == 0 && shouldRunAlgorithm == false" colspan="6">
+            <div class="text-secondary ">
+              Calculate anagram count of different lengths
             </div>
           </td>
         </tr>
@@ -79,9 +84,14 @@
           <td>{{ anagram.effectiveTo }}</td>
         </tr>
         <tr>
-          <td *ngIf="anagrams.length == 0" colspan="6">
+          <td *ngIf="anagrams.length == 0 && shouldSearchWord" colspan="6">
             <div class="spinner-border text-secondary" role="status">
               <span class="visually-hidden">Loading...</span>
+            </div>
+          </td>
+          <td *ngIf="anagrams.length == 0 && shouldSearchWord == false" colspan="6">
+            <div class="text-secondary">
+              Find anagrams for a word from the above dictionary
             </div>
           </td>
         </tr>

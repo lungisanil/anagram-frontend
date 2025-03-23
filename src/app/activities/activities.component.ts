@@ -11,6 +11,8 @@ export class ActivitiesComponent implements OnInit {
   addedWords: WordRecord[] = [];
   removedWords: WordRecord[] = [];
   page: number = 1;
+  shouldDisplayAddedWords: boolean = false;
+  shouldDisplayRemovedWords: boolean = false;
 
 
   constructor(private activitiesService: ActivitiesService) {
@@ -27,6 +29,7 @@ export class ActivitiesComponent implements OnInit {
         this.addedWords = returnedWords.content;
       }
     });
+    this.shouldDisplayAddedWords = true;
   }
 
   getAllRemovedWords() {
@@ -35,6 +38,7 @@ export class ActivitiesComponent implements OnInit {
         this.removedWords = returnedWords.content;
       }
     });
+    this.shouldDisplayRemovedWords = true;
   }
 
   get numbers(): number[] {
