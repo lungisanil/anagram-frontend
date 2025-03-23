@@ -1,6 +1,7 @@
 # AnagramApp
 
-This Angular app has got 3 main components which are the dictionary, anagrams and activities
+This Angular app has got 3 main components which are the dictionary, anagrams and activities. The app is available on
+http://localhost:4200/
 
 ## Dictionary Tab
 
